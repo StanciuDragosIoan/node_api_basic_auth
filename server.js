@@ -46,7 +46,7 @@ const server = http.createServer((req, res) => {
   
         <h2 style="font-size: 2rem; text-align:center; display:block; margin:auto; width:30rem; margin-top:5rem; border:5px solid #ccc; border-radius:10px; padding:3rem;">
           Your 'database' is <a href="#">db.json</a>
-          that's where you can see all your resources data is being persisted so the API 'remembers' it.
+          that's where all the resources data is being persisted so the API 'remembers' it.
         </h2>
         `);
         res.end();
@@ -358,7 +358,7 @@ const server = http.createServer((req, res) => {
                     res.write(`
                       Welcome to our api ${userName},
                       go to <a href="http://localhost:8000/resources" target="_blank">http://localhost:8000/resources</a>
-                      to view your resources
+                      to view all resources
                     `);
 
                     res.end();
