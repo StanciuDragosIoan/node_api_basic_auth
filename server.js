@@ -51,7 +51,12 @@ const server = http.createServer((req, res) => {
         `);
         res.end();
       } else {
-        res.write("please log in");
+        res.write(`
+        Please log in by going to <br>
+        <a href="http://localhost:8000/login">The login page</a> or
+        <br>
+        sign up on the <a href="http://localhost:8000/register">The register page<a/>
+      `);
         res.end();
       }
 
@@ -61,7 +66,12 @@ const server = http.createServer((req, res) => {
         resource.renderLogout(req, res);
         resource.getAll(res);
       } else {
-        res.write("please log in");
+        res.write(`
+        Please log in by going to <br>
+        <a href="http://localhost:8000/login">The login page</a> or
+        <br>
+        sign up on the <a href="http://localhost:8000/register">The register page<a/>
+      `);
         res.end();
       }
       break;
@@ -70,7 +80,12 @@ const server = http.createServer((req, res) => {
         resource.renderLogout(req, res);
         resource.getJson(res);
       } else {
-        res.write("please log in");
+        res.write(`
+          Please log in by going to <br>
+          <a href="http://localhost:8000/login">The login page</a> or
+          <br>
+          sign up on the <a href="http://localhost:8000/register">The register page<a/>
+        `);
         res.end();
       }
       break;
@@ -95,7 +110,12 @@ const server = http.createServer((req, res) => {
           `);
           res.end();
         } else {
-          res.write("please log in");
+          res.write(`
+          Please log in by going to <br>
+          <a href="http://localhost:8000/login">The login page</a> or
+          <br>
+          sign up on the <a href="http://localhost:8000/register">The register page<a/>
+        `);
           res.end();
         }
       } else if (method === "POST") {
@@ -140,7 +160,12 @@ const server = http.createServer((req, res) => {
           res.end();
         }
       } else {
-        res.write("please log in");
+        res.write(`
+        Please log in by going to <br>
+        <a href="http://localhost:8000/login">The login page</a> or
+        <br>
+        sign up on the <a href="http://localhost:8000/register">The register page<a/>
+      `);
         res.end();
       }
 
@@ -191,7 +216,12 @@ const server = http.createServer((req, res) => {
           res.end();
         }
       } else {
-        res.write("please log in");
+        res.write(`
+          Please log in by going to <br>
+          <a href="http://localhost:8000/login">The login page</a> or
+          <br>
+          sign up on the <a href="http://localhost:8000/register">The register page<a/>
+        `);
         res.end();
       }
 
@@ -383,7 +413,12 @@ const server = http.createServer((req, res) => {
           });
         }
       } else {
-        res.write("please log in");
+        res.write(`
+          Please log in by going to <br>
+          <a href="http://localhost:8000/login">The login page</a> or
+          <br>
+          sign up on the <a href="http://localhost:8000/register">The register page<a/>
+        `);
         res.end();
       }
 
@@ -392,7 +427,12 @@ const server = http.createServer((req, res) => {
       if (isAuth === true) {
         res.write("protected route here");
       } else {
-        res.write("please log in");
+        res.write(`
+        Please log in by going to <br>
+        <a href="http://localhost:8000/login">The login page</a> or
+        <br>
+        sign up on the <a href="http://localhost:8000/register">The register page<a/>
+      `);
       }
       res.end();
       break;
@@ -507,8 +547,12 @@ const server = http.createServer((req, res) => {
           res.end();
         }
       } else {
-        res.write("PLEASE LOG IN");
-        res.end();
+        res.write(`
+          Please log in by going to <br>
+          <a href="http://localhost:8000/login">The login page</a> or
+          <br>
+          sign up on the <a href="http://localhost:8000/register">The register page<a/>
+        `);
       }
 
       break;
