@@ -322,52 +322,49 @@ const server = http.createServer((req, res) => {
             pw: pass,
           };
           //read auth users file
-
           fs.readFile("users.json", "utf8", function (err, data) {
             if (err) throw err;
             if (data !== "") {
               let users = JSON.parse(data).users;
+
+              let userExists = false;
               users.map((u) => {
                 if (u.username === userName && u.pw === pass) {
-                  fs.readFile("auth.json", "utf8", function (err, data) {
-                    if (err) throw err;
-                    if (data !== "") {
-                      let authUsers = JSON.parse(data).authUsers;
-                      let obj = {};
-                      obj.authUsers = authUsers;
-                      authUsers.push(authUser);
-                      fs.writeFile(
-                        "auth.json",
-                        JSON.stringify(obj),
-                        (err) => {}
-                      );
-                    } else {
-                      //file empty no user
-                      let obj = {};
-                      let authUsers = [];
-                      obj.authUsers = authUsers;
-                      authUsers.push(authUser);
-                      fs.writeFile(
-                        "auth.json",
-                        JSON.stringify(obj),
-                        (err) => {}
-                      );
-                    }
-                    resource.saveCookie(res, userName);
+                  userExists = true;
+                }
+              });
 
-                    res.write(`
+              if (userExists === true) {
+                fs.readFile("auth.json", "utf8", function (err, data) {
+                  if (err) throw err;
+                  if (data !== "") {
+                    let authUsers = JSON.parse(data).authUsers;
+                    let obj = {};
+                    obj.authUsers = authUsers;
+                    authUsers.push(authUser);
+                    fs.writeFile("auth.json", JSON.stringify(obj), (err) => {});
+                  } else {
+                    //file empty no user
+                    let obj = {};
+                    let authUsers = [];
+                    obj.authUsers = authUsers;
+                    authUsers.push(authUser);
+                    fs.writeFile("auth.json", JSON.stringify(obj), (err) => {});
+                  }
+                  resource.saveCookie(res, userName);
+
+                  res.write(`
                       Welcome to our api ${userName},
                       go to <a href="http://localhost:8000/resources" target="_blank">http://localhost:8000/resources</a>
                       to view all resources
                     `);
 
-                    res.end();
-                  });
-                } else {
-                  res.write("WRONG CREDENTIALS");
                   res.end();
-                }
-              });
+                });
+              } else if (userExists === false) {
+                res.write("WRONG CREDENTIALS");
+                res.end();
+              }
             } else {
               //file empty no user
               res.write("THERE ARE CURRENTLY NO USERS IN THE DB");
@@ -405,6 +402,8 @@ const server = http.createServer((req, res) => {
                     LOGUT
                     `);
                     res.end();
+                  } else {
+                    return;
                   }
                 });
               } else {
